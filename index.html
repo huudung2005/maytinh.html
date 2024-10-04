@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="margin-left: 50px">bài 1</h1>
+    <table style="width: 60%; margin-left: 50px">
+      <tr>
+        <th colspan="4">Thực hiện 4 phép tính cộng, trừ, nhân, chia</th>
+      </tr>
+      <tr>
+        <td><input type="number" id="num1" placeholder="Số 1" /></td>
+        <td>
+          <select style="margin-right: 50px" id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+          </select>
+        </td>
+        <td><input type="number" id="num2" placeholder="Số 2" /></td>
+        <td>
+          <button onclick="calculate()">=</button> <span id="result"></span>
+        </td>
+      </tr>
+    </table>
+    <script>
+      function calculate() {
+        var num1 = parseFloat(document.getElementById("num1").value);
+        var num2 = parseFloat(document.getElementById("num2").value);
+        var operator = document.getElementById("operator").value;
+        var result;
+
+        if (operator === "+") {
+          result = num1 + num2;
+        } else if (operator === "-") {
+          result = num1 - num2;
+        } else if (operator === "*") {
+          result = num1 * num2;
+        } else if (operator === "/") {
+          result = num1 / num2;
+        }
+
+        document.getElementById("result").textContent = result;
+      }
+    </script>
+    <a href="bai2.html"><h1 style="margin-left: 50px">bài 2</h1></a>
+  </body>
+</html>

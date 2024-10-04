@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+
+        background-color: #f0f0f0;
+        margin-right: 50px;
+        margin-left: 50px;
+      }
+      .calculator {
+        width: 215px;
+        background-color: #3e3e3e;
+        padding: 20px;
+        border-radius: 20px;
+        margin-left: 50px;
+        margin-top: 100px;
+      }
+      .display {
+        width: 88%;
+        height: 40px;
+        background-color: #eee;
+        text-align: right;
+        padding: 10px;
+        font-size: 20px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      .btn {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+        font-size: 18px;
+        border: none;
+        background-color: #9a9a9a;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn.equal {
+        background-color: orange;
+      }
+      .btn.clear {
+        background-color: red;
+      }
+      .btn.equal {
+        width: 43%;
+        height: 38px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="margin-left: 50px">bài 2</h1>
+    <div class="calculator">
+      <div id="display" class="display">0</div>
+      <div>
+        <button class="btn clear" onclick="clearDisplay()">MC</button>
+        <button class="btn" onclick="memoryPlus()">M+</button>
+        <button class="btn" onclick="memoryRecall()">MR</button>
+        <button class="btn" onclick="chooseOperator('/')">/</button>
+      </div>
+      <div>
+        <button class="btn" onclick="appendNumber('7')">7</button>
+        <button class="btn" onclick="appendNumber('8')">8</button>
+        <button class="btn" onclick="appendNumber('9')">9</button>
+        <button class="btn" onclick="chooseOperator('*')">X</button>
+      </div>
+      <div>
+        <button class="btn" onclick="appendNumber('4')">4</button>
+        <button class="btn" onclick="appendNumber('5')">5</button>
+        <button class="btn" onclick="appendNumber('6')">6</button>
+        <button class="btn" onclick="chooseOperator('-')">-</button>
+      </div>
+      <div>
+        <button class="btn" onclick="appendNumber('1')">1</button>
+        <button class="btn" onclick="appendNumber('2')">2</button>
+        <button class="btn" onclick="appendNumber('3')">3</button>
+        <button class="btn" onclick="chooseOperator('+')">+</button>
+      </div>
+      <div>
+        <button class="btn" onclick="appendNumber('0')">0</button>
+        <button class="btn" onclick="appendNumber('.')">.</button>
+        <button class="btn equal" onclick="calculateResult()">=</button>
+      </div>
+    </div>
+
+    <script>
+      let displayValue = "";
+      let currentOperator = null;
+      let firstOperand = null;
+      let memory = 0;
+
+      function appendNumber(number) {
+        displayValue += number;
+        document.getElementById("display").textContent = displayValue;
+      }
+
+      function chooseOperator(operator) {
+        if (firstOperand === null) {
+          firstOperand = parseFloat(displayValue);
+        }
+        currentOperator = operator;
+        displayValue = "";
+      }
+
+      function calculateResult() {
+        let secondOperand = parseFloat(displayValue);
+        let result;
+        if (currentOperator === "+") {
+          result = firstOperand + secondOperand;
+        } else if (currentOperator === "-") {
+          result = firstOperand - secondOperand;
+        } else if (currentOperator === "*") {
+          result = firstOperand * secondOperand;
+        } else if (currentOperator === "/") {
+          result = firstOperand / secondOperand;
+        }
+        displayValue = result.toString();
+        document.getElementById("display").textContent = displayValue;
+        firstOperand = null;
+        currentOperator = null;
+      }
+
+      function clearDisplay() {
+        displayValue = "";
+        firstOperand = null;
+        currentOperator = null;
+        document.getElementById("display").textContent = "0";
+      }
+
+      function memoryPlus() {
+        memory += parseFloat(displayValue || 0);
+      }
+
+      function memoryRecall() {
+        displayValue = memory.toString();
+        document.getElementById("display").textContent = displayValue;
+      }
+    </script>
+  </body>
+</html>
